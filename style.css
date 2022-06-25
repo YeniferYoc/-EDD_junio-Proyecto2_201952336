@@ -1,0 +1,19 @@
+body{
+    background: aqua;
+    font-family: Papyrus;
+    } 	
+#lienzo{
+    height: 200px;
+    width: 900px;
+    background-color: pink;
+}
+#lienzo2{
+    height: 200px;
+    width: 900px;
+    background-color:  pink;
+}
+#lienzo3{
+    height: 200px;
+    width: 1800px;
+    background-color:  pink;
+}
