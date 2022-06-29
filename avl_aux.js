@@ -86,7 +86,7 @@ class AVL{
     }
     //rotacion dobles derecha
     Rotaciondoblederecha(nodo){
-        nodo.derecho = this.rotacionizquierda(nodo.derecho);
+        nodo.derecha = this.rotacionizquierda(nodo.derecha);
         return this.rotacionderecha(nodo);
     }
 
@@ -133,13 +133,25 @@ class AVL{
 }
 console.log("Recorrido preorden")
 var arbolavl = new AVL();
-arbolavl.insertar(5);
-arbolavl.insertar(0);
-arbolavl.insertar(15);
-arbolavl.insertar(66);
-
-arbolavl.insertar(22);
-arbolavl.insertar(1);
+arbolavl.insertar(7140394722109);
+arbolavl.insertar(5710530186284);
+arbolavl.insertar(2561983506422);
+arbolavl.insertar(7851050325132);
+arbolavl.insertar(6568804293458);
+arbolavl.insertar(2984229606920);
+arbolavl.insertar(9716381936092);
+arbolavl.insertar(1219344961531);
+arbolavl.insertar(8154736748444);
+arbolavl.insertar(4560930105887);
+arbolavl.insertar(3601995024933);
+arbolavl.insertar(8175940098554);
+arbolavl.insertar(3679640345001);
+arbolavl.insertar(3542469120193);
+arbolavl.insertar(9038170328286);
+arbolavl.insertar(4862364527422);
+arbolavl.insertar(1175928735759);
+arbolavl.insertar(6124436571933);
+arbolavl.insertar(4306113783482);
 console.log("Recorrido preorden")
 arbolavl.preorden()
 console.log("Recorrido inorden")

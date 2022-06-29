@@ -18,9 +18,9 @@ class Nodo{
     getCodigoInterno(){
         let  codigo;
         if(this.izquierda==null && this.derecha==null){
-            codigo="nodo"+this.id+" [ label =\""+this.ob_autor.nombre+"\"];\n";
+            codigo="nodo"+this.id+" [ label =\""+this.ob_actor.nombre+"\"];\n";
         }else{
-            codigo="nodo"+this.id+" [ label =\""+this.ob_autor.nombre+"\"];\n";
+            codigo="nodo"+this.id+" [ label =\""+this.ob_actor.nombre+"\"];\n";
         }
         if(this.izquierda!=null){
             codigo=codigo + this.izquierda.getCodigoInterno() +
@@ -76,7 +76,7 @@ class Arbol_binario{
     in_orden(nodo){
         if(nodo!=null){
             this.in_orden(nodo.izquierda);
-            console.log("Actor:",nodo.ob_actor.nombre,nodo.id);
+            console.log("Actor:",nodo.ob_actor.dni);
             this.in_orden(nodo.derecha);
         }
     }

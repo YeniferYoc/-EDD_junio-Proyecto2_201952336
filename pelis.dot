@@ -1,0 +1,38 @@
+digraph yeni{
+rankdir=TB;
+node [style=filled, fillcolor=pink];
+nodo2 [ label ="Clay Henson"];
+nodo13 [ label ="May Herman"];
+nodo3 [ label ="Olson Singleton"];
+nodo8 [ label ="Carol Oliver"];
+nodo17 [ label ="Waters Barr"];
+nodo8->nodo17
+nodo3->nodo8
+nodo14 [ label ="Patrick Terry"];
+nodo3->nodo14
+nodo13->nodo3
+nodo10 [ label ="Barron Stein"];
+nodo19 [ label ="Sonia Maddox"];
+nodo10->nodo19
+nodo16 [ label ="Evangeline Brennan"];
+nodo10->nodo16
+nodo13->nodo10
+nodo2->nodo13
+nodo12 [ label ="Clarke Fischer"];
+nodo1 [ label ="Newton Villarreal"];
+nodo5 [ label ="Frankie Roach"];
+nodo18 [ label ="Burgess King"];
+nodo5->nodo18
+nodo1->nodo5
+nodo4 [ label ="Acosta Shaffer"];
+nodo1->nodo4
+nodo12->nodo1
+nodo7 [ label ="Shelly Bates"];
+nodo15 [ label ="Jocelyn Conner"];
+nodo7->nodo15
+nodo12->nodo7
+nodo2->nodo12
+}
+
+4
+

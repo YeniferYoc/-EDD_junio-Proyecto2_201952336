@@ -4,7 +4,7 @@ class Categoria{
         this.company = company;
     }
     mostrar_categoria(){
-        console.log('dni: '+this.id+' categoria: '+this.company);
+        console.log('id: '+this.id+' categoria: '+this.company);
         
     }
 

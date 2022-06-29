@@ -1,0 +1,149 @@
+digraph L{
+ node[shape = box fillcolor = "white" style  = filled]
+ subgraph cluster_p{
+ 
+ bgcolor = "#e43c5c"
+ edge [dir = "both"]celda0[label= "ID: 0", fillcolor =white, group = 1 ];
+celda0000[label= "Categoria: COMFIRM", fillcolor =white, group =1 ];
+celda1[label= "ID: 1", fillcolor =white, group = 1 ];
+celda2[label= "ID: 2", fillcolor =white, group = 1 ];
+celda2000[label= "Categoria: XPLOR", fillcolor =white, group =3 ];
+celda3[label= "ID: 3", fillcolor =white, group = 1 ];
+celda3000[label= "Categoria: FLOTONIC", fillcolor =white, group =4 ];
+celda3111[label= "Categoria: RAMJOB", fillcolor =white, group =4 ];
+celda3222[label= "Categoria: TALENDULA", fillcolor =white, group =4 ];
+celda3333[label= "Categoria: SAVVY", fillcolor =white, group =4 ];
+celda4[label= "ID: 4", fillcolor =white, group = 1 ];
+celda4000[label= "Categoria: FRENEX", fillcolor =white, group =5 ];
+celda4111[label= "Categoria: PLASMOSIS", fillcolor =white, group =5 ];
+celda4222[label= "Categoria: ZOLAVO", fillcolor =white, group =5 ];
+celda4333[label= "Categoria: BEDDER", fillcolor =white, group =5 ];
+celda5[label= "ID: 5", fillcolor =white, group = 1 ];
+celda5000[label= "Categoria: ZEPITOPE", fillcolor =white, group =6 ];
+celda6[label= "ID: 6", fillcolor =white, group = 1 ];
+celda6000[label= "Categoria: EARTHPLEX", fillcolor =white, group =7 ];
+celda6111[label= "Categoria: RETROTEX", fillcolor =white, group =7 ];
+celda6222[label= "Categoria: EXTRAWEAR", fillcolor =white, group =7 ];
+celda7[label= "ID: 7", fillcolor =white, group = 1 ];
+celda7000[label= "Categoria: BULLZONE", fillcolor =white, group =8 ];
+celda8[label= "ID: 8", fillcolor =white, group = 1 ];
+celda8000[label= "Categoria: INSECTUS", fillcolor =white, group =9 ];
+celda8111[label= "Categoria: BITTOR", fillcolor =white, group =9 ];
+celda8222[label= "Categoria: NEPTIDE", fillcolor =white, group =9 ];
+celda8333[label= "Categoria: SCENTY", fillcolor =white, group =9 ];
+celda8444[label= "Categoria: MAINELAND", fillcolor =white, group =9 ];
+celda8555[label= "Categoria: ZAGGLES", fillcolor =white, group =9 ];
+celda9[label= "ID: 9", fillcolor =white, group = 1 ];
+celda9000[label= "Categoria: SNOWPOKE", fillcolor =white, group =10 ];
+celda10[label= "ID: 10", fillcolor =white, group = 1 ];
+celda10000[label= "Categoria: RODEOCEAN", fillcolor =white, group =11 ];
+celda10111[label= "Categoria: TERAPRENE", fillcolor =white, group =11 ];
+celda11[label= "ID: 11", fillcolor =white, group = 1 ];
+celda11000[label= "Categoria: IMAGEFLOW", fillcolor =white, group =12 ];
+celda11111[label= "Categoria: SLAX", fillcolor =white, group =12 ];
+celda12[label= "ID: 12", fillcolor =white, group = 1 ];
+celda12000[label= "Categoria: APEXIA", fillcolor =white, group =13 ];
+celda12111[label= "Categoria: AEORA", fillcolor =white, group =13 ];
+celda12222[label= "Categoria: QUALITERN", fillcolor =white, group =13 ];
+celda13[label= "ID: 13", fillcolor =white, group = 1 ];
+celda13000[label= "Categoria: TUBALUM", fillcolor =white, group =14 ];
+celda13111[label= "Categoria: SQUISH", fillcolor =white, group =14 ];
+celda13222[label= "Categoria: COMVEY", fillcolor =white, group =14 ];
+celda14[label= "ID: 14", fillcolor =white, group = 1 ];
+celda14000[label= "Categoria: ERSUM", fillcolor =white, group =15 ];
+celda15[label= "ID: 15", fillcolor =white, group = 1 ];
+celda15000[label= "Categoria: UNI", fillcolor =white, group =16 ];
+celda16[label= "ID: 16", fillcolor =white, group = 1 ];
+celda17[label= "ID: 17", fillcolor =white, group = 1 ];
+celda17000[label= "Categoria: BEZAL", fillcolor =white, group =18 ];
+celda17111[label= "Categoria: SECURIA", fillcolor =white, group =18 ];
+celda17222[label= "Categoria: ZORROMOP", fillcolor =white, group =18 ];
+celda18[label= "ID: 18", fillcolor =white, group = 1 ];
+celda18000[label= "Categoria: IMKAN", fillcolor =white, group =19 ];
+celda18111[label= "Categoria: RADIANTIX", fillcolor =white, group =19 ];
+celda18222[label= "Categoria: VIASIA", fillcolor =white, group =19 ];
+celda19[label= "ID: 19", fillcolor =white, group = 1 ];
+celda19000[label= "Categoria: AMRIL", fillcolor =white, group =20 ];
+celda19111[label= "Categoria: LYRIA", fillcolor =white, group =20 ];
+celda0->celda1;
+celda1->celda2;
+celda2->celda3;
+celda3->celda4;
+celda4->celda5;
+celda5->celda6;
+celda6->celda7;
+celda7->celda8;
+celda8->celda9;
+celda9->celda10;
+celda10->celda11;
+celda11->celda12;
+celda12->celda13;
+celda13->celda14;
+celda14->celda15;
+celda15->celda16;
+celda16->celda17;
+celda17->celda18;
+celda18->celda19;
+celda0->celda0000;
+celda2->celda2000;
+celda3->celda3000;
+celda3000->celda3111;
+celda3111->celda3222;
+celda3222->celda3333;
+celda4->celda4000;
+celda4000->celda4111;
+celda4111->celda4222;
+celda4222->celda4333;
+celda5->celda5000;
+celda6->celda6000;
+celda6000->celda6111;
+celda6111->celda6222;
+celda7->celda7000;
+celda8->celda8000;
+celda8000->celda8111;
+celda8111->celda8222;
+celda8222->celda8333;
+celda8333->celda8444;
+celda8444->celda8555;
+celda9->celda9000;
+celda10->celda10000;
+celda10000->celda10111;
+celda11->celda11000;
+celda11000->celda11111;
+celda12->celda12000;
+celda12000->celda12111;
+celda12111->celda12222;
+celda13->celda13000;
+celda13000->celda13111;
+celda13111->celda13222;
+celda14->celda14000;
+celda15->celda15000;
+celda17->celda17000;
+celda17000->celda17111;
+celda17111->celda17222;
+celda18->celda18000;
+celda18000->celda18111;
+celda18111->celda18222;
+celda19->celda19000;
+celda19000->celda19111;
+{rank = same;celda0;celda0000;}
+}
+{rank = same;celda2;celda2000;}
+{rank = same;celda3;celda3000;celda3111;celda3222;celda3333;}
+{rank = same;celda4;celda4000;celda4111;celda4222;celda4333;}
+{rank = same;celda5;celda5000;}
+{rank = same;celda6;celda6000;celda6111;celda6222;}
+{rank = same;celda7;celda7000;}
+{rank = same;celda8;celda8000;celda8111;celda8222;celda8333;celda8444;celda8555;}
+{rank = same;celda9;celda9000;}
+{rank = same;celda10;celda10000;celda10111;}
+{rank = same;celda11;celda11000;celda11111;}
+{rank = same;celda12;celda12000;celda12111;celda12222;}
+{rank = same;celda13;celda13000;celda13111;celda13222;}
+{rank = same;celda14;celda14000;}
+{rank = same;celda15;celda15000;}
+}
+{rank = same;celda17;celda17000;celda17111;celda17222;}
+{rank = same;celda18;celda18000;celda18111;celda18222;}
+{rank = same;celda19;celda19000;celda19111;}
+}}

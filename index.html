@@ -41,6 +41,8 @@
   
 
   <!-- Template Main CSS File -->
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="estilo_mis_divs.css" rel="stylesheet">
   
@@ -52,6 +54,24 @@
   <link href="assets/css/style.css" rel="stylesheet"> linea 29
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script type="text/javascript">
+    $(function() { 
+        $("#imprimir").click(function() { 
+            html2canvas($("#lienzo_admin"), {
+                onrendered: function(canvas) {
+                    theCanvas = canvas;
+                    document.body.appendChild(canvas);
+
+                    /*
+                    canvas.toBlob(function(blob) {
+                      saveAs(blob, "Dashboard.png"); 
+                    });
+                    */
+                }
+            });
+        });
+    });
+  </script>
 </head>
 
 <body>
@@ -139,7 +159,7 @@
       </div>
       <!--Carga Masiva-->
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Usuarios</h5>
@@ -152,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Peliculas</h5>
@@ -165,7 +185,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">Categorias</h5>
+                      <div class="mb-3">
+                          <label for="formFile" class="form-label">Selecciona un archivo en formato
+                              JSON</label>
+                          <input class="form-control" type="file" id="archivo_cate">
+                      </div>
+                      <button type="button" class="btn btn-primary" id = "categoria">Cargar</button>
+                  </div>
+              </div>
+          </div>
+            <div class="col-sm-3">
               <div class="card">
                   <div class="card-body">
                       <h5 class="card-title">Actores</h5>
@@ -190,7 +223,7 @@
               <div class="col-lg-3">
                 <div class="info">
                   <div class="address">
-                    <button type="button" class="btn btn-secondary" id ="gra_peli" >Grafo Peliculas</button>
+                    <button type="button" class="btn btn-secondary" id ="gra_cli" >Grafo Clientes</button>
                   </div>
 
                   <div class="phone">
@@ -198,11 +231,11 @@
                   </div>
     
                   <div class="email">
-                    <button type="button" class="btn btn-secondary" id ="gra_peli" >Grafo Clientes</button>
+                    <button type="button" class="btn btn-secondary" id ="gra_peli" >Grafo Peliculas</button>
                   </div>
     
                   <div class="phone">
-                    <button type="button" class="btn btn-secondary" id ="gra_peli" >Grafo Actores</button>
+                    <button type="button" class="btn btn-secondary" id ="gra_actores" >Grafo Actores</button>
                   </div>
     
                 </div>

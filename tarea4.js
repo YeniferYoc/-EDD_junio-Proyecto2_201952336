@@ -1,8 +1,7 @@
-import { Pelicula } from "./Pelicula.js";
 var contador = 1
 class Nodo{
-    constructor(objeto_pelicula){
-        this.objeto_pelicula = objeto_pelicula;
+    constructor(_valor){
+        this.valor=_valor;
         this.izquierda = null;
         this.derecha = null;
         this.altura = 0;
@@ -19,9 +18,9 @@ class Nodo{
        getCodigoInterno(){
            let  codigo;
            if(this.izquierda==null && this.derecha==null){
-               codigo="nodo"+this.id+" [ label =\""+this.objeto_pelicula.nom_pelicula+"\"];\n";
+               codigo="nodo"+this.id+" [ label =\""+this.valor+"\"];\n";
            }else{
-               codigo="nodo"+this.id+" [ label =\""+this.objeto_pelicula.nom_pelicula+"\"];\n";
+               codigo="nodo"+this.id+" [ label =\""+this.valor+"\"];\n";
            }
            if(this.izquierda!=null){
                codigo=codigo + this.izquierda.getCodigoInterno() +
@@ -36,37 +35,35 @@ class Nodo{
        }
 }
 
-class Arbol_AVL{
+class AVL{
     constructor(){
         this.raiz = null;
     }
+    //maximo
     MAXIMO(valor1,valor2){
         if(valor1>valor2) return valor1;
         return valor2;
     }
+    //altura del arbol
     altura(nodo){
         if(nodo == null) return -1;
         return nodo.altura;
     }
-    insertar(ob_peli){
-        console.log("quiere intertas "+ob_peli.id)
-        this.raiz = this.add(ob_peli,this.raiz)
-        console.log("inserto")
-        console.log(ob_peli.id)
+    //insertar
+    insertar(valor){
+        this.raiz = this.add(valor,this.raiz)
 
     }
     //insertar recursivo
-    add(ob_peli, nodo){
-
-        if(nodo == null) return new Nodo(ob_peli);
-
+    add(valor, nodo){
+        if(nodo == null) return new Nodo(valor);
         else{
-            if(ob_peli.id < nodo.objeto_pelicula.id){
-                nodo.izquierda = this.add(ob_peli, nodo.izquierda)
+            if(valor < nodo.valor){
+                nodo.izquierda = this.add(valor, nodo.izquierda)
                 if(this.altura(nodo.derecha)-this.altura(nodo.izquierda) == -2){
                     //programar los casos 
                     //rsi
-                    if(ob_peli.id < nodo.izquierda.objeto_pelicula.id){
+                    if(valor < nodo.izquierda.valor){
                         nodo = this.rotacionizquierda(nodo);
                     }//rdi}
                     else{
@@ -74,13 +71,12 @@ class Arbol_AVL{
                     }
                     
                 }
-            }else if(ob_peli.id > nodo.objeto_pelicula.id){
-               
-                nodo.derecha = this.add(ob_peli, nodo.derecha);
+            }else if(valor > nodo.valor){
+                nodo.derecha = this.add(valor, nodo.derecha);
                 if(this.altura(nodo.derecha)-this.altura(nodo.izquierda)== 2){
                     //otros dos casos
                     //rotacion simple derecha
-                    if(ob_peli.id > nodo.derecha.objeto_pelicula.id){
+                    if(valor > nodo.derecha.valor){
                         nodo = this.rotacionderecha(nodo);
                     }else{
                         nodo = this.Rotaciondoblederecha(nodo);
@@ -88,7 +84,7 @@ class Arbol_AVL{
                     //rotacion doble derecha
                 }
             }else{
-                nodo.objeto_pelicula = ob_peli;
+                nodo.valor = valor;
             }
         }
         nodo.altura = this.MAXIMO(this.altura(nodo.izquierda),this.altura(nodo.derecha))+1
@@ -98,10 +94,6 @@ class Arbol_AVL{
 
     //rotacion simple izquierda
     rotacionizquierda(nodo){
-        if(nodo == null){
-            console.log("dd")
-        }
-        console.log(nodo.objeto_pelicula.id)
         var aux = nodo.izquierda;
         nodo.izquierda = aux.derecha;
         aux.derecha = nodo;
@@ -135,12 +127,10 @@ class Arbol_AVL{
     //recorridos
     preorden(){
         this.pre_orden(this.raiz);
-        console.log("jhdjhdj")
-        console.log(this.raiz.objeto_pelicula.id)
     }
     pre_orden(nodo){
         if(nodo!=null){
-            console.log("pelicula=" +nodo.objeto_pelicula.id);
+            console.log("valor=" +nodo.valor);
             this.pre_orden(nodo.izquierda);
             this.pre_orden(nodo.derecha);
         }
@@ -154,7 +144,7 @@ class Arbol_AVL{
         if(nodo!=null){
             this.post_orden(nodo.izquierda);
             this.post_orden(nodo.derecha);
-            console.log("pelicula=" +nodo.objeto_pelicula.id);
+            console.log("valor=" +nodo.valor);
         }
     }
     //inorden
@@ -164,7 +154,7 @@ class Arbol_AVL{
     in_orden(nodo){
         if(nodo!=null){
             this.in_orden(nodo.izquierda);
-            console.log("Pelicula = " +nodo.objeto_pelicula.id);
+            console.log("valor=" +nodo.valor);
             this.in_orden(nodo.derecha);    
         }
     }
@@ -175,24 +165,36 @@ class Arbol_AVL{
 
     }
 }
-export{Arbol_AVL}
-/*
-let peli1 = new Pelicula(5,"hola",'','','','');
-let peli2 = new Pelicula(0,"hola",'','','','');
-let peli3 = new Pelicula(15,"hola",'','','','');
-let peli4 = new Pelicula(66,"hola",'','','','');
-let peli5 = new Pelicula(1,"hola",'','','','');
-let peli6 = new Pelicula(22,"hola",'','','','');
-let arbol = new Arbol_AVL();
-arbol.insertar(peli1);
-arbol.insertar(peli2);
-arbol.insertar(peli3);
-arbol.insertar(peli4);
-arbol.insertar(peli5);
-arbol.insertar(peli6);
 console.log("Recorrido preorden")
-arbol.preorden()
+var arbolavl = new AVL();
+arbolavl.insertar(11);
+arbolavl.insertar(23);
+arbolavl.insertar(35);
+arbolavl.insertar(46);
+arbolavl.insertar(54);
+arbolavl.insertar(26);
+arbolavl.insertar(83);
+arbolavl.insertar(20);
+arbolavl.insertar(100);
+arbolavl.insertar(54);
+arbolavl.insertar(2);
+arbolavl.insertar(1);
+arbolavl.insertar(6);
+arbolavl.insertar(8);
+console.log("Recorrido preorden")
+arbolavl.preorden()
 console.log("Recorrido inorden")
-arbol.inorden()
+arbolavl.inorden()
 console.log("Recorrido postorden")
-arbol.postorden()*/
+arbolavl.postorden()
+console.log("GRAFICANDO PELICULAS")
+                    
+                    var codigo_dot = arbolavl.graficar_avl()
+                    console.log(codigo_dot)
+                    
+                    d3.select("#log").graphviz()
+                                .width(1800)
+                                .height(500)
+                                .renderDot(codigo_dot)
+            
+                         

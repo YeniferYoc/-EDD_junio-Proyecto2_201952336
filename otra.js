@@ -1,39 +1,12 @@
-import { Pelicula } from "./Pelicula.js";
-var contador = 1
+/*import { Pelicula } from "./Pelicula.js";
+
 class Nodo{
     constructor(objeto_pelicula){
         this.objeto_pelicula = objeto_pelicula;
         this.izquierda = null;
         this.derecha = null;
         this.altura = 0;
-        this.id = contador++;
     }
-    graficar(){
-        let codigo_dt=   "digraph yeni{\n" 
-        codigo_dt += "rankdir=TB;\n" 
-        codigo_dt += "node [style=filled, fillcolor=pink];\n"
-        codigo_dt += this.getCodigoInterno()
-        codigo_dt +=  "}\n";
-                   return codigo_dt;
-       }
-       getCodigoInterno(){
-           let  codigo;
-           if(this.izquierda==null && this.derecha==null){
-               codigo="nodo"+this.id+" [ label =\""+this.objeto_pelicula.nom_pelicula+"\"];\n";
-           }else{
-               codigo="nodo"+this.id+" [ label =\""+this.objeto_pelicula.nom_pelicula+"\"];\n";
-           }
-           if(this.izquierda!=null){
-               codigo=codigo + this.izquierda.getCodigoInterno() +
-                  "nodo"+this.id+"->nodo"+this.izquierda.id+"\n";
-           }
-           if(this.derecha!=null){
-               codigo=codigo + this.derecha.getCodigoInterno() +
-                  "nodo"+this.id+"->nodo"+this.derecha.id+"\n";                    
-           }
-           return codigo;
-         
-       }
 }
 
 class Arbol_AVL{
@@ -75,7 +48,6 @@ class Arbol_AVL{
                     
                 }
             }else if(ob_peli.id > nodo.objeto_pelicula.id){
-               
                 nodo.derecha = this.add(ob_peli, nodo.derecha);
                 if(this.altura(nodo.derecha)-this.altura(nodo.izquierda)== 2){
                     //otros dos casos
@@ -122,7 +94,7 @@ class Arbol_AVL{
     }
     //rotacion dobles derecha
     Rotaciondoblederecha(nodo){
-        nodo.derecha = this.rotacionizquierda(nodo.derecha);
+        nodo.derecho = this.rotacionizquierda(nodo.derecho);
         return this.rotacionderecha(nodo);
     }
 
@@ -135,8 +107,6 @@ class Arbol_AVL{
     //recorridos
     preorden(){
         this.pre_orden(this.raiz);
-        console.log("jhdjhdj")
-        console.log(this.raiz.objeto_pelicula.id)
     }
     pre_orden(nodo){
         if(nodo!=null){
@@ -168,15 +138,7 @@ class Arbol_AVL{
             this.in_orden(nodo.derecha);    
         }
     }
-    graficar_avl(){
-        let codigo =this.raiz.graficar();
-        console.log(codigo)
-        return codigo;
-
-    }
 }
-export{Arbol_AVL}
-/*
 let peli1 = new Pelicula(5,"hola",'','','','');
 let peli2 = new Pelicula(0,"hola",'','','','');
 let peli3 = new Pelicula(15,"hola",'','','','');
@@ -196,3 +158,57 @@ console.log("Recorrido inorden")
 arbol.inorden()
 console.log("Recorrido postorden")
 arbol.postorden()*/
+
+
+/*
+console.log("Recorrido preorden")
+var arbolavl = new AVL();
+arbolavl.insertar(5);
+arbolavl.insertar(40);
+arbolavl.insertar(100);
+arbolavl.insertar(280);
+arbolavl.insertar(80);
+arbolavl.insertar(4020);
+arbolavl.insertar(9);
+console.log("Recorrido preorden")
+arbolavl.preorden()
+console.log("Recorrido inorden")
+arbolavl.inorden()
+console.log("Recorrido postorden")
+arbolavl.postorden()*/
+
+/*
+
+preorden(){
+    this.pre_orden(this.root);
+}
+pre_orden(nodo){
+    if(nodo!=null){
+        console.log("PElicual =" +nodo.objeto_pelicula.id);
+        this.pre_orden(nodo.left);
+        this.pre_orden(nodo.right);
+    }
+}
+
+//postorden
+postorden(){
+    this.post_orden(this.root);
+}
+post_orden(nodo){
+    if(nodo!=null){
+        this.post_orden(nodo.left);
+        this.post_orden(nodo.right);
+        console.log("valor=" +nodo.objeto_pelicula.id);
+    }
+}
+//inorden
+inorden(){
+    this.in_orden(this.root);
+}
+in_orden(nodo){
+    if(nodo!=null){
+        this.in_orden(nodo.left);
+        console.log("valor=" +nodo.objeto_pelicula.id);
+        this.in_orden(nodo.right);    
+    }
+}*/

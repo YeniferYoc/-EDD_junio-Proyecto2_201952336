@@ -132,7 +132,6 @@ function avl() {
     var avl = new AVL()
     avl.add(5)
     avl.add(10)	
-
     avl.add(20)
     avl.add(25)
     avl.add(30)
@@ -149,5 +148,5 @@ function avl() {
     avl.dot += '}'
     return avl.dot
 }
-let dond = avl();
-console.log(dond)
+let cariable = avl();
+console.log(cariable)
