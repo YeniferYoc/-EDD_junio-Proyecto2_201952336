@@ -9,6 +9,7 @@ import { Categoria } from "./Categoria.js";
 import { Tabla_Hash } from "./Estructura_tabla.js";
 import { Lista_categoria } from "./Lista_categorias.js";
 import { Valor_hash } from "./Valor_hash.js";
+import { Lista_pelis } from "./lista_libros.js";
 
 
 
@@ -23,6 +24,8 @@ let lista_us = new Lista_clientes();
 let arbol_pelis = new Arbol_AVL();
 let arbol_actores = new Arbol_binario();
 let tabla_hash = new Tabla_Hash();
+let lista_pelis = new Lista_pelis();
+
 for(let i = 0; i<20;i++){
     console.log(i)
     let lista_cate = new Lista_categoria();
@@ -43,6 +46,7 @@ document.getElementById("gra_cli").onclick = graficar_usuarios;
 document.getElementById("gra_cate").onclick = graficar_tabla_hash;
 document.getElementById("gra_peli").onclick = graficar_peliculas;
 document.getElementById("gra_actores").onclick = graficar_actores;
+document.getElementById("ver_pelis").onclick = vista_peliculas;
 
 
 
@@ -54,6 +58,33 @@ document.getElementById("gra_actores").onclick = graficar_actores;
             user_archive = event.target.files[0];
         })
     });
+
+    document.getElementById("vista_peliculas")
+        .addEventListener("click", function (e) {
+            const btn = e.target.id;
+            console.log( e.target.id)
+            if(btn == "orden"){
+                var d = document.getElementById("orden");
+	            var displaytext = d.options[d.selectedIndex].text;
+                console.log(displaytext)
+                if(displaytext =='Ascendente' ){
+                    vista_peliculas(1);
+
+                }else if(displaytext == 'Descendente'){
+                    vista_peliculas(2);
+                }
+            }
+            let tempo = lista_pelis.head;
+            while(tempo != null){
+                let nombre_bot = tempo.objeto_valor.id +"_info";
+                console.log("entro")
+                if(nombre_bot == btn){
+                    alert("funciona")
+                }
+                tempo = tempo.siguiente;
+            }
+        });
+       
 
     function proceso_carga_user(){
         alert("entro")
@@ -112,7 +143,7 @@ document.getElementById("gra_actores").onclick = graficar_actores;
             let precio_Q = Peliculas[i].precio_Q;
             let lista_comen = new Lista_comentarios();
             
-            let nueva_pelicula = new Pelicula(id_pelicula,nombre_pelicula,descripcion,puntuacion_star,precio_Q,lista_comen);
+            let nueva_pelicula = new Pelicula(id_pelicula,nombre_pelicula,descripcion,puntuacion_star,precio_Q,lista_comen,true);
             arbol_pelis.insertar(nueva_pelicula);
         }
         arbol_pelis.inorden();
@@ -192,7 +223,23 @@ document.getElementById("gra_actores").onclick = graficar_actores;
             let tempo = tabla_hash.head
             while(tempo !=null){
                 if(tempo.objeto_valor.id == valor){
-                    tempo.objeto_valor.categorias.agregar_categoria(nueva_categoria);
+                    let tempo_cater = tempo.objeto_valor.categorias.head;
+                    let repetido = false;
+                    while(tempo_cater !=null){
+                        if(tempo_cater.objeto_categoria.id == id){
+                            console.log("repetidad")
+                            repetido = true;
+                        }else{
+                            tempo.objeto_valor.categorias.agregar_categoria(nueva_categoria);
+                  
+                        }
+                        tempo_cater = tempo_cater.siguiente;
+                    }
+                    if(repetido == false){
+                        tempo.objeto_valor.categorias.agregar_categoria(nueva_categoria);
+                    }
+
+                    //tempo.objeto_valor.categorias.agregar_categoria(nueva_categoria);
                 }
                 tempo = tempo.siguiente;
             }
@@ -429,4 +476,74 @@ document.getElementById("gra_actores").onclick = graficar_actores;
                     .renderDot(codigo_dot)
 
              }
+    function imprimir(){
+	html2canvas([document.getElementById("lienzo_admin")]), {
+		onrendered: function (canvas) {
+			var img = canvas.toDataURL('image/png'); //o por 'image/jpeg' 
+			//display 64bit imag
+			document.write('<img src="'+img+'"/>');		    
+		}
+	}
+}
+function llenar(){
     
+        
+    llenar_(arbol_pelis.raiz);
+}
+function llenar_(nodo){
+    
+    if(nodo!=null){
+        llenar_(nodo.izquierda);
+        lista_pelis.agregar_valor(nodo.objeto_pelicula);
+        llenar_(nodo.derecha);
+    }
+
+}
+    function vista_peliculas(val){
+        
+        llenar();
+        if(val == 1){
+            lista_pelis.Ordenar_cant();
+        }else{
+            lista_pelis.Ordenar_cant_des();
+        }
+        
+        let cadena = "<label>ORDENAR</label><select id=\"orden\" name=\"orden_name\">";
+        cadena += "<option value=\"\">Elija opción</option>";
+        cadena += "<option value=\"as\">Ascendente</option>";
+        cadena += "<option value=\"des\">Descendente</option>";
+        cadena += "</select><br/>";
+        cadena += "";
+        
+
+        let nodo = lista_pelis.head;
+        cadena += "<footer id=\"footer\">";
+        cadena += "<div class=\"footer-top\">";
+        cadena += "<div class=\"container\">";
+        cadena += "<div class=\"row\">";
+        while(nodo != null){
+            cadena += "<div class=\"col-lg-2 col-md-6 footer-contact\">";
+            cadena += "<h3 id = \""+nodo.objeto_valor.id+"_e\">"+nodo.objeto_valor.nom_pelicula+"</h3>";
+            cadena += "</div>";
+            cadena += "<div class=\"col-lg-3 col-md-6 footer-newsletter\">";
+            cadena += "<h4>DESCRIPCION</h4>";
+            cadena += "<p>"+nodo.objeto_valor.descripcion+"</p>";
+            cadena += "</div>";
+            cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
+            cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_info\" >INFORMACION</button>";
+            cadena += "</div>";
+            cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
+            cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_comprar\" >COMPRAR</button>";
+            cadena += "</div>";
+            cadena += "<div class=\"col-lg-3 col-md-6 footer-links\">";
+            cadena += "<h4>Precio: "+nodo.objeto_valor.precio+"</h4>";
+            cadena += "</div>";
+            nodo = nodo.siguiente;
+        }
+        
+        
+        cadena += "</div>";
+        cadena += "</div>";
+        cadena += "</div>";
+        document.getElementById("vista_peliculas").innerHTML = cadena;
+    }

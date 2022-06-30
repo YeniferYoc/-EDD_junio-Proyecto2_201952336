@@ -6,7 +6,7 @@ class Nodo{
     }
 }
 
-class Tabla_Hash{
+class Lista_pelis{
     constructor(){
         this.head = null;
         this.end = null;
@@ -32,9 +32,7 @@ class Tabla_Hash{
             this.end = nuevoNodo;
         }
     }
-    insertar_catego(){
-        
-    }
+    
     
     ImprimirLista(){
         var temporal = this.head;
@@ -42,8 +40,8 @@ class Tabla_Hash{
         while(temporal!=null){
             
             console.log("NODO: "+contador);
-            temporal.objeto_valor.mostrar_valor_hash();
-            temporal.objeto_valor.categorias.ImprimirLista();
+            temporal.objeto_valor.mostrar_pelicula();
+            temporal.objeto_valor.comentarios.ImprimirLista();
             temporal = temporal.siguiente;
             contador++;
         }
@@ -56,19 +54,15 @@ class Tabla_Hash{
         let contador_us = 1;
         let aux;
         while(tempo != null){
-            console.log("entrp_primer wjile")
             let tempo2 = this.head;
             let contador_us2 = 0;
             while(tempo2 != null && tempo2.siguiente != null){
-                console.log(tempo2.objeto_libro_cli.nom_libro)
-                console.log(tempo2.siguiente.objeto_libro_cli.nom_libro)
-                console.log("entro segundo while")
-                if((tempo2.siguiente.objeto_libro_cli.nom_libro) < (tempo2.objeto_libro_cli.nom_libro) ){
-                    console.log("mas grande")
-                    aux = tempo2.objeto_libro_cli;
-                    tempo2.objeto_libro_cli = tempo2.siguiente.objeto_libro_cli;
-                    tempo2.siguiente.objeto_libro_cli = aux;
-                    this.ImprimirLista()
+                if((tempo2.siguiente.objeto_valor.nom_pelicula) < (tempo2.objeto_valor.nom_pelicula) ){
+                    
+                    aux = tempo2.objeto_valor;
+                    tempo2.objeto_valor = tempo2.siguiente.objeto_valor;
+                    tempo2.siguiente.objeto_valor = aux;
+                    
                 }
                 tempo2 = tempo2.siguiente;
                 contador_us2 += 1;
@@ -83,19 +77,16 @@ class Tabla_Hash{
         let contador_us = 1;
         let aux;
         while(tempo != null){
-            console.log("entrp_primer wjile")
+          
             let tempo2 = this.head;
             let contador_us2 = 0;
             while(tempo2 != null && tempo2.siguiente != null){
-                console.log(tempo2.objeto_libro_cli.nom_libro)
-                console.log(tempo2.siguiente.objeto_libro_cli.nom_libro)
-                console.log("entro segundo while")
-                if((tempo2.siguiente.objeto_libro_cli.nom_libro) > (tempo2.objeto_libro_cli.nom_libro) ){
-                    console.log("mas grande")
-                    aux = tempo2.objeto_libro_cli;
-                    tempo2.objeto_libro_cli = tempo2.siguiente.objeto_libro_cli;
-                    tempo2.siguiente.objeto_libro_cli = aux;
-                    this.ImprimirLista()
+                if((tempo2.siguiente.objeto_valor.nom_pelicula) > (tempo2.objeto_valor.nom_pelicula) ){
+                   
+                    aux = tempo2.objeto_valor;
+                    tempo2.objeto_valor = tempo2.siguiente.objeto_valor;
+                    tempo2.siguiente.objeto_valor = aux;
+                  
                 }
                 tempo2 = tempo2.siguiente;
                 contador_us2 += 1;
@@ -108,6 +99,6 @@ class Tabla_Hash{
       }
 
 }
-export {Tabla_Hash};
+export {Lista_pelis};
 
 

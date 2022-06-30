@@ -42,19 +42,24 @@
 
   <!-- Template Main CSS File -->
   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="estilo_mis_divs.css" rel="stylesheet">
   
 
   <!-- =======================================================
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://github.com/niklasvh/html2canvas/releases/download/0.4.1/html2canvas.js"></script>
+<script type="text/javascript" src="http://www.nihilogic.dk/labs/canvas2image/base64.js"></script>
+<script type="text/javascript" src="http://www.nihilogic.dk/labs/canvas2image/canvas2image.js"></script>
   * Template Name: Tempo - v4.7.0
   * Template URL: https://bootstrapmade.com/tempo-free-onepage-bootstrap-theme/
   * Author: BootstrapMade.com
   <link href="assets/css/style.css" rel="stylesheet"> linea 29
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <script type="text/javascript">
+ <!-- <script type="text/javascript">
+    
     $(function() { 
         $("#imprimir").click(function() { 
             html2canvas($("#lienzo_admin"), {
@@ -71,7 +76,27 @@
             });
         });
     });
-  </script>
+  </script>--->
+  <style>
+    #lienzo_admin{
+      height:500px;
+      width: 18000;
+    }
+    
+  #lienzo_admin{
+      display: grid;
+      grid-auto-flow: column;
+      padding: 1em;
+      gap: 1em;
+      
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+  }
+  
+    
+  </style>
+  
 </head>
 
 <body>
@@ -246,7 +271,6 @@
     
                 
                 <div id = "lienzo_admin">
-
                   
                 </div>
                 <br>
@@ -303,8 +327,8 @@
     </section>
     </div><!-- FIN ADMINISTRACION -----------------Wilfred -->
 
-    <!----------------USUARIO ---------------------------->
-    <div id = "usuario" class = "card border" style = "display: none; width: 100vw;">  
+    <!----------------USUARIO -class = "card border" style = "display: none; width: 100vw;"--------------------------->
+    <div id = "usuario" >  
       <div class="section-title">
         <h1>USUARIO</h1>    
         <h3>Mi <span>Perfil</span></h3>
@@ -317,33 +341,22 @@
       <section id="features" class="features">
       <div class="container">
         <div class="section-title">
-          <h3>Opciones<span> Usuario</span></h3>
+          <h3>Movie<span>cats</span></h3>
         </div>
 
         <div class="row">
           <div class="col-lg-3 col-md-4 col-6 col-6">
-            <div class="icon-box">
-              <i class="ri-store-line" style="color: #ffbb2c;"></i>
-              <h3 id = "comprar_e"><a href="#comprar">Comprar Libro</a></h3>
-            </div>
+            <button type="button" class="btn btn-secondary" id ="ver_pelis" >Ver Peliculas</button>
           </div>
           <div class="col-lg-3 col-md-4 col-6">
-            <div class="icon-box">
-              <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-              <h3 id ="mi_eU"><a href="#top_vista">Mi Biblioteca</a></h3>
-            </div>
+            <button type="button" class="btn btn-secondary" id ="ver_actores" >Ver Actores</button>
           </div>
           <div class="col-lg-3 col-md-4 col-6 mt-4 mt-lg-0">
-            <div class="icon-box">
-              <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-              <h3 id = "bib_eU"><a href="#biblioteca">Biblioteca</a></h3>
-            </div>
+            <button type="button" class="btn btn-secondary" id ="ver_cate" >Ver Categorias</button>
           </div>
           <div class="col-lg-3 col-md-4 col-6 mt-4 mt-lg-0">
-            <div class="icon-box">
-              <i class="ri-database-2-line" style="color: #47aeff;"></i>
-              <h3 id = "auto_eU"><a href="#autores">Conoce a los Autores</a></h3>
-            </div>
+            <button type="button" class="btn btn-secondary" id ="vee" >Sin funcion</button>
+          </div>
           </div>
           
         </div>
@@ -355,6 +368,21 @@
 
     <!------------------ ACCIONES USUARIO------------->
     <!-------------------- COMPRAR --------------------->
+    
+    <div id="vista_peliculas">
+      <label>Ordenar</label><select id="orden" name="orden_name">
+
+        <option value="">Elija opción</option>
+
+        <option value="as_or">Ascendente</option>
+
+        <option value="des_or">Descendente</option>
+
+    </select><br/>
+      <div id="vista_peliculas_">
+      
+      </div>
+    </div>
     <div id = "comprar" class = "card border" style = "display: none; width: 100vw;">
       <div class="card-body">
         <div class="input-group mb-3">
@@ -556,14 +584,17 @@
   <script src="{% static '/assets/vendor/php-email-form/validate.js' %}"></script>
   <script src="{% static '/assets/js/main.js' %}"></script>-->
   
-
+  <script>
+    document.getElementById('lienzo_admin').style.overflow = 'auto';
+    </script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="//d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
     <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
-  <script type="module" src="./main.js"></script>
+  
+    <script type="module" src="./main.js"></script>
   
   
 

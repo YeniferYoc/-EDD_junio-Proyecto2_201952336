@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body{
+    background-color: rgb(4, 84, 23);
+}
+  
+h1{
+    position: absolute;
+    top: 0;
+    margin: 3em;
+    left: 37%;
+    margin-left: 0;
+}
+  
+.main_box{
+    margin: 0 auto;
+    margin-top: 15em;
+    display: grid;
+    grid-auto-flow: column;
+    padding: 1em;
+    gap: 1em;
+    height: 15em;
+    width: 30em;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+}
+  
+.main_box > a{
+    scroll-snap-align: center;
+}
+  
+.main_box img{
+    width: 12em;
+    max-width: none;
+    object-fit: contain;
+    border-radius: 1em;
+}
