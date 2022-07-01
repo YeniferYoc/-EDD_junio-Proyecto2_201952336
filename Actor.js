@@ -3,7 +3,7 @@ class Actor{
         this.dni = dni;
         this.nombre = nombre;
         this.correo = correo;
-        this.telefono = descripcion;
+        this.descripcion = descripcion;
     }
     mostrar_actor(){
         console.log('DNI: '+this.dpi+' Nombre de actor: '+this.nombre);

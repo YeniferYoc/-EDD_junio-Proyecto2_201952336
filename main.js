@@ -10,15 +10,17 @@ import { Tabla_Hash } from "./Estructura_tabla.js";
 import { Lista_categoria } from "./Lista_categorias.js";
 import { Valor_hash } from "./Valor_hash.js";
 import { Lista_pelis } from "./lista_libros.js";
+import { Comentario } from "./Comentario.js";
 
 
 
 let user_archive;
 let cate_archive;
-let usuario_ingresado;
+let usuario_ingresado = 1;
 let contra_ingre;
 let peli_archive;
 let actor_archive;
+let contador_ac = 0;
 
 let lista_us = new Lista_clientes();
 let arbol_pelis = new Arbol_AVL();
@@ -26,6 +28,7 @@ let arbol_actores = new Arbol_binario();
 let tabla_hash = new Tabla_Hash();
 let lista_pelis = new Lista_pelis();
 
+//LLENAR LA TABLA HASH
 for(let i = 0; i<20;i++){
     console.log(i)
     let lista_cate = new Lista_categoria();
@@ -34,7 +37,8 @@ for(let i = 0; i<20;i++){
 
 }
 tabla_hash.ImprimirLista()
-
+let cadena_info = "";
+let cadena_actores = "";
 
 
 document.getElementById("login").onclick = login;
@@ -47,6 +51,7 @@ document.getElementById("gra_cate").onclick = graficar_tabla_hash;
 document.getElementById("gra_peli").onclick = graficar_peliculas;
 document.getElementById("gra_actores").onclick = graficar_actores;
 document.getElementById("ver_pelis").onclick = vista_peliculas;
+document.getElementById("ver_cate").onclick = vista_categorias;
 
 
 
@@ -58,11 +63,12 @@ document.getElementById("ver_pelis").onclick = vista_peliculas;
             user_archive = event.target.files[0];
         })
     });
-
+    //VISTA USUARIO, COMPRAR, ETC.
     document.getElementById("vista_peliculas")
         .addEventListener("click", function (e) {
             const btn = e.target.id;
             console.log( e.target.id)
+            //ORDEN DE PELICULAS ----------------------------------------------
             if(btn == "orden"){
                 var d = document.getElementById("orden");
 	            var displaytext = d.options[d.selectedIndex].text;
@@ -74,15 +80,184 @@ document.getElementById("ver_pelis").onclick = vista_peliculas;
                     vista_peliculas(2);
                 }
             }
+            //INFORMACION PELICULA----------------------------------------------------
+            else{
             let tempo = lista_pelis.head;
+            let bot_info = false;
+            let bot_calificar = false;
+            let calificacion_peli;
             while(tempo != null){
                 let nombre_bot = tempo.objeto_valor.id +"_info";
                 console.log("entro")
                 if(nombre_bot == btn){
-                    alert("funciona")
+                    bot_info = true;
+                    cadena_info ="";
+                    cadena_info += "<section id=\"blog\" class=\"blog\">";
+                    cadena_info += "<div class=\"container\" data-aos=\"fade-up\">";
+                    cadena_info += "<div class=\"row\">";
+                    cadena_info += "<div class=\"col-lg-12 entries\">";
+                    cadena_info += "<article class=\"entry entry-single\">";
+                    cadena_info += "<h2 class=\"entry-title\">";
+                    cadena_info += ""+tempo.objeto_valor.nom_pelicula+"";
+                    cadena_info += "</h2>";
+                    cadena_info += "<div class=\"entry-content\">";
+                    cadena_info += "<p>Descripción: "+tempo.objeto_valor.descripcion+"</p>";
+                    cadena_info += "<br>";
+                    cadena_info += "<br>";
+                    cadena_info += "<div class=\"entry-meta\">";
+                    cadena_info += "<div class=\" text-center\">";
+                    cadena_info += "<div class=\"row\">";
+                    cadena_info += "<div class=\"col-md-2 form-group\">";
+                    cadena_info += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+tempo.objeto_valor.id+"_calificar\" >PUNTUACION</button>";
+                    cadena_info += "</div>";
+                    cadena_info += "<div class=\"col-md-3 form-group\">";
+                    cadena_info += "<input id = \"punt_caja\" type=\"text\" class=\"form-control\" aria-label=\"Username\" aria-describedby=\"basic-addon1\">";
+                    cadena_info += "</div>";
+                    cadena_info += "<div class=\"col-md-3 form-group\">";
+                    cadena_info += "<span class = \"fa fa-star\" id=\"1_es\"></span>";
+                    cadena_info += "<span class = \"fa fa-star\" id=\"2_es\"></span>";
+                    cadena_info += "<span class = \"fa fa-star\" id=\"3_es\"></span>";
+                    cadena_info += "<span class = \"fa fa-star\" id=\"4_es\"></span>";
+                    cadena_info += "<span class = \"fa fa-star\" id=\"5_es\"></span>";
+                    calificacion_peli = tempo.objeto_valor.puntuacion;
+                    cadena_info += "</div>";
+                    cadena_info += "<div class=\" text-center\">";
+                    cadena_info += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+tempo.objeto_valor.id+"_comprar\" >Alquilar</button>";
+                    cadena_info += "<h2>Q."+tempo.objeto_valor.precio+"</h2>";
+                    cadena_info += "</div>";
+                    cadena_info += "</div>";
+                    cadena_info += "<div class=\"blog-comments\">";
+                    cadena_info += "<h4 class=\"comments-count\">Comentarios</h4>";
+                    let tempo_com = tempo.objeto_valor.comentarios.head;
+                    let cont_comentarios  = 1;
+                    while(tempo_com != null){
+                        cadena_info += "<div id=\"comment-"+cont_comentarios+"\" class=\"comment\">";
+                        cadena_info += "<div class=\"d-flex\">";
+                        cadena_info += "<div class=\"comment-img\"><img src=\"assets/img/blog/usuar.png\" alt=\"\"></div>";
+                        cadena_info += "<div>";
+                        cadena_info += "<h5>"+tempo_com.objeto_comentario.autor+"</h5>";
+                        cadena_info += "<p>"+tempo_com.objeto_comentario.comentario+"</p>";
+                        cadena_info += "</div>";
+                        cadena_info += "</div>";
+                        cadena_info += "</div>";
+                        cont_comentarios ++;
+                        tempo_com = tempo_com.siguiente;
+                    }
+                    cadena_info += "<div id= \"nuevo_com\">";
+                    cadena_info += "</div>";
+                    cadena_info += "<div class=\"reply-form\">";
+                    cadena_info += "<h4>Deja tu comentario: </h4>";
+                    cadena_info += "<div class=\"row\">";
+                    cadena_info += "<div class=\"col form-group\">";
+                    cadena_info += "<textarea id=\"comment\" class=\"form-control\" ></textarea>";
+                    cadena_info += "</div>";
+                    cadena_info += "</div>";
+                    cadena_info += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+tempo.objeto_valor.id+"_enviar_com\" >Enviar</button>";
+                    cadena_info += "</article>";
+                    cadena_info += "</div>";
+                    cadena_info += "</div>";
+                    cadena_info += "</div>";
+                    cadena_info += "</section>";
+                    /*cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";
+                    cadena_info += "";*/
+                }
+                tempo = tempo.siguiente;
+
+                
+            }
+            if(bot_info == false){
+
+            }else{
+                console.log("se pinta")
+                document.getElementById("vista_peliculas_").innerHTML = cadena_info;
+                for(let i = 0; i<5;i++){
+                    if(i<calificacion_peli){
+                     document.getElementById((i+1)+"_es").style.color = "orange";
+                     
+                    } 
+                 }
+            }
+            //BOTON CALIFICAR ---------------------------------------------
+            tempo = lista_pelis.head;
+            while(tempo != null){
+                let nombre_bot = tempo.objeto_valor.id +"_calificar";
+                if(nombre_bot == btn){
+                    for(let i = 0; i<5;i++){
+                        
+                            document.getElementById((i+1)+"_es").style.color = "gray";
+                            
+                        
+                        }
+                    let cali = (document.getElementById("punt_caja").value)
+                    tempo.objeto_valor.puntuacion = cali;
+                    for(let i = 0; i<5;i++){
+                    if(i<cali){
+                        document.getElementById((i+1)+"_es").style.color = "orange";
+                        
+                    } 
+                    }
+                    document.getElementById("punt_caja").value = "";
                 }
                 tempo = tempo.siguiente;
             }
+            //BOTON ALQUILAR --------------------------------------------
+            tempo = lista_pelis.head;
+            while(tempo!= null){
+                let nombre_bot = tempo.objeto_valor.id +"_comprar";
+                console.log("entro")
+                if(nombre_bot == btn){
+                    tempo.objeto_valor.disponible = false;
+                    tempo.objeto_valor.comprador = usuario_ingresado;
+                    alert("Gracias por su compra!")
+                }
+                tempo = tempo.siguiente;
+            }
+            //BOTON ENVIAR COMENTARIOS
+            tempo = lista_pelis.head;
+            while(tempo!= null){
+                let nombre_bot = tempo.objeto_valor.id +"_enviar_com";
+                console.log("entro comentarios")
+                if(nombre_bot == btn){
+                    let coment_caja = (document.getElementById("comment").value)
+                    let nuevo_comentario = new Comentario(coment_caja, usuario_ingresado);
+                    tempo.objeto_valor.comentarios.agregar_comentario(nuevo_comentario)
+                    
+                    alert("Gracias por sus comentarios!")
+                    document.getElementById("comment").value = ""; 
+                }
+                tempo = tempo.siguiente;
+            }
+            }
+        });
+    document.getElementById("vista_actores")
+        .addEventListener("click",function(e){
+            const btn = e.target.id;
+            console.log( e.target.id)
+            if(btn == "inorden"){
+                inorden();
+            }else if(btn == "preorden"){
+                preorden();
+            }else if(btn == "posorden"){
+                posorden();
+            }
+            //ORDEN DE Actores ----------------------------------------------
+            
         });
        
 
@@ -143,10 +318,13 @@ document.getElementById("ver_pelis").onclick = vista_peliculas;
             let precio_Q = Peliculas[i].precio_Q;
             let lista_comen = new Lista_comentarios();
             
-            let nueva_pelicula = new Pelicula(id_pelicula,nombre_pelicula,descripcion,puntuacion_star,precio_Q,lista_comen,true);
+            let nueva_pelicula = new Pelicula(id_pelicula,nombre_pelicula,descripcion,puntuacion_star,precio_Q,lista_comen,true,0);
             arbol_pelis.insertar(nueva_pelicula);
         }
         arbol_pelis.inorden();
+        console.log("llenar peliciulas")
+        llenar();
+        lista_pelis.ImprimirLista()
         
         
         //vista_biblioteca();
@@ -269,10 +447,10 @@ document.getElementById("ver_pelis").onclick = vista_peliculas;
          }
 
     async function login() {
-        alert("login")
+        
         let nom_usu = (document.getElementById("user_caja").value)
         let contra_usu = document.getElementById("contra").value
-        usuario_ingresado = nom_usu;
+        
         contra_ingre = contra_usu;
         let tempo = lista_us.head;
         let cre_correcta = false;
@@ -291,6 +469,7 @@ document.getElementById("ver_pelis").onclick = vista_peliculas;
             while(tempo !=null){
                 if(tempo.objeto_cliente.usuario == nom_usu && tempo.objeto_cliente.contra == contra_usu){
                     cre_correcta = true;
+                    usuario_ingresado = tempo.objeto_cliente.dpi;
                     alert("BIENVENIDO USUARIO")
                     document.getElementById("usuario").style.display = "";
                 }
@@ -386,7 +565,6 @@ document.getElementById("ver_pelis").onclick = vista_peliculas;
         var codigo_dot = "digraph L{\n node[shape = box fillcolor = \"white\" style  = filled]\n subgraph cluster_p{\n ";
         //codigo_dot += "\n label= \"LISTA USUARIOS \"";
         codigo_dot += "\n bgcolor = \"#e43c5c\"";
-        codigo_dot += "\n edge [dir = \"both\"]";
 
         var celda="celda";
         //SE DECLARAN LAS CELDAS
@@ -501,28 +679,64 @@ function llenar_(nodo){
 }
     function vista_peliculas(val){
         
-        llenar();
+        
         if(val == 1){
             lista_pelis.Ordenar_cant();
         }else{
             lista_pelis.Ordenar_cant_des();
         }
         
-        let cadena = "<label>ORDENAR</label><select id=\"orden\" name=\"orden_name\">";
-        cadena += "<option value=\"\">Elija opción</option>";
-        cadena += "<option value=\"as\">Ascendente</option>";
-        cadena += "<option value=\"des\">Descendente</option>";
-        cadena += "</select><br/>";
-        cadena += "";
-        
-
+        let cadena = "";
         let nodo = lista_pelis.head;
         cadena += "<footer id=\"footer\">";
         cadena += "<div class=\"footer-top\">";
         cadena += "<div class=\"container\">";
         cadena += "<div class=\"row\">";
         while(nodo != null){
-            cadena += "<div class=\"col-lg-2 col-md-6 footer-contact\">";
+            if(nodo.objeto_valor.disponible == true){
+                //dispobile para todos
+                console.log("todos")
+                cadena += "<div class=\"col-lg-2 col-md-6 footer-contact\">";
+            cadena += "<h3 id = \""+nodo.objeto_valor.id+"_e\">"+nodo.objeto_valor.nom_pelicula+"</h3>";
+            cadena += "</div>";
+            cadena += "<div class=\"col-lg-3 col-md-6 footer-newsletter\">";
+            cadena += "<h4>DESCRIPCION</h4>";
+            cadena += "<p>"+nodo.objeto_valor.descripcion+"</p>";
+            cadena += "</div>";
+            cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
+            cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_info\" >Informacion</button>";
+            cadena += "</div>";
+                cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
+                cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_comprar\" >Alquilar</button>";
+                cadena += "</div>";
+                cadena += "<div class=\"col-lg-3 col-md-6 footer-links\">";
+                cadena += "<h4>Precio: Q."+nodo.objeto_valor.precio+"</h4>";
+                cadena += "</div>";
+        
+            }
+            else if(nodo.objeto_valor.disponible == false && usuario_ingresado == nodo.objeto_valor.comprador){
+                console.log("solo us")
+                //no esta disponible pero si para el dueño
+                cadena += "<div class=\"col-lg-2 col-md-6 footer-contact\">";
+            cadena += "<h3 id = \""+nodo.objeto_valor.id+"_e\">"+nodo.objeto_valor.nom_pelicula+"</h3>";
+            cadena += "</div>";
+            cadena += "<div class=\"col-lg-3 col-md-6 footer-newsletter\">";
+            cadena += "<h4>DESCRIPCION</h4>";
+            cadena += "<p>"+nodo.objeto_valor.descripcion+"</p>";
+            cadena += "</div>";
+            cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
+            cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_info\" >Informacion</button>";
+            cadena += "</div>";
+                /*cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
+                cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_comprar\" >Alquilar</button>";
+                cadena += "</div>";
+                cadena += "<div class=\"col-lg-3 col-md-6 footer-links\">";
+                cadena += "<h4>Precio: Q."+nodo.objeto_valor.precio+"</h4>";
+                cadena += "</div>";*/
+            }else{
+                //no esta disponible ni el es dueño
+            }
+            /*cadena += "<div class=\"col-lg-2 col-md-6 footer-contact\">";
             cadena += "<h3 id = \""+nodo.objeto_valor.id+"_e\">"+nodo.objeto_valor.nom_pelicula+"</h3>";
             cadena += "</div>";
             cadena += "<div class=\"col-lg-3 col-md-6 footer-newsletter\">";
@@ -532,18 +746,151 @@ function llenar_(nodo){
             cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
             cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_info\" >INFORMACION</button>";
             cadena += "</div>";
-            cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
-            cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_comprar\" >COMPRAR</button>";
-            cadena += "</div>";
-            cadena += "<div class=\"col-lg-3 col-md-6 footer-links\">";
-            cadena += "<h4>Precio: "+nodo.objeto_valor.precio+"</h4>";
-            cadena += "</div>";
+            if (nodo.objeto_valor.disponible == true){
+                cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
+                cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_comprar\" >COMPRAR</button>";
+                cadena += "</div>";
+                cadena += "<div class=\"col-lg-3 col-md-6 footer-links\">";
+                cadena += "<h4>Precio: "+nodo.objeto_valor.precio+"</h4>";
+                cadena += "</div>";
+            }else{
+
+            }*/
+            
             nodo = nodo.siguiente;
         }
-        
-        
         cadena += "</div>";
         cadena += "</div>";
         cadena += "</div>";
-        document.getElementById("vista_peliculas").innerHTML = cadena;
+        document.getElementById("vista_peliculas_").innerHTML = cadena;
     }
+    function preorden(){
+        cadena_actores ="";
+        contador_ac = 0;
+        cadena_actores += "<section id=\"blog\" class=\"blog\">";
+        cadena_actores += "<div class=\"container\" data-aos=\"fade-up\">";
+        cadena_actores += "<div class=\"row\">";
+        cadena_actores += "<div class=\"col-lg-12 entries\">";
+        cadena_actores += "<article class=\"entry entry-single\">";
+        pre_orden(arbol_actores.raiz);
+        cadena_actores += "</article>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</section>";
+        document.getElementById("vista_actores_").innerHTML = cadena_actores;
+    }
+
+    function pre_orden(nodo){
+        if(nodo!=null){
+            cadena_actores += "<h2 class=\"entry-title\">";
+            cadena_actores += ""+contador_ac+". "+nodo.ob_actor.nombre+"";
+            cadena_actores += "</h2>";
+                    cadena_actores += "<div class=\"entry-content\">";
+                    cadena_actores += "<p>Descripción: "+nodo.ob_actor.descripcion+"</p>";
+                    cadena_actores += "<br>";
+                    cadena_actores += "<br>";
+                    contador_ac ++;
+            pre_orden(nodo.izquierda);
+            pre_orden(nodo.derecha);
+        }
+    }
+    function inorden(){
+        cadena_actores = "";
+        contador_ac = 0;
+        cadena_actores += "<section id=\"blog\" class=\"blog\">";
+        cadena_actores += "<div class=\"container\" data-aos=\"fade-up\">";
+        cadena_actores += "<div class=\"row\">";
+        cadena_actores += "<div class=\"col-lg-12 entries\">";
+        cadena_actores += "<article class=\"entry entry-single\">";
+        in_orden(arbol_actores.raiz);
+        cadena_actores += "</article>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</section>";
+                   
+        document.getElementById("vista_actores_").innerHTML = cadena_actores;
+    }
+    
+    function in_orden(nodo){
+        if(nodo!=null){
+            in_orden(nodo.izquierda);
+            cadena_actores += "<h2 class=\"entry-title\">";
+            cadena_actores += ""+contador_ac+". "+nodo.ob_actor.nombre+"";
+            cadena_actores += "</h2>";
+                    cadena_actores += "<div class=\"entry-content\">";
+                    cadena_actores += "<p>Descripción: "+nodo.ob_actor.descripcion+"</p>";
+                    cadena_actores += "<br>";
+                    cadena_actores += "<br>";
+                    contador_ac ++;
+                    console.log("actor ",nodo.ob_actor.dni)
+            in_orden(nodo.derecha);
+        }
+    }
+    function posorden(){
+        cadena_actores = "";
+        contador_ac = 0;
+        cadena_actores += "<section id=\"blog\" class=\"blog\">";
+        cadena_actores += "<div class=\"container\" data-aos=\"fade-up\">";
+        cadena_actores += "<div class=\"row\">";
+        cadena_actores += "<div class=\"col-lg-12 entries\">";
+        cadena_actores += "<article class=\"entry entry-single\">";
+        pos_orden(arbol_actores.raiz);
+        cadena_actores += "</article>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</div>";
+                    cadena_actores += "</section>";
+        document.getElementById("vista_actores_").innerHTML = cadena_actores;
+    }
+    
+    function pos_orden(nodo){
+        if(nodo!=null){
+            pos_orden(nodo.izquierda);
+            pos_orden(nodo.derecha);
+            cadena_actores += "<h2 class=\"entry-title\">";
+            cadena_actores += ""+contador_ac+". "+nodo.ob_actor.nombre+"";
+            cadena_actores += "</h2>";
+                    cadena_actores += "<div class=\"entry-content\">";
+                    cadena_actores += "<p>Descripción: "+nodo.ob_actor.descripcion+"</p>";
+                    cadena_actores += "<br>";
+                    cadena_actores += "<br>"; 
+                    contador_ac ++;         
+        }
+    }
+    function vista_categorias(){
+        var cadena_html = "<section id=\"portfolio\" class=\"portfolio\">";
+        cadena_html += "<div class=\"container\">";
+        cadena_html += "<div class=\"section-title\">";
+        cadena_html += "<h3>Nuestras <span>Categorias</span></h3>"
+        cadena_html += "</div>"
+        cadena_html += "<div class=\"row portfolio-container\">";
+        let tempo = tabla_hash.head;
+        while(tempo != null){
+            let tempo_cat = tempo.objeto_valor.categorias.head;
+            while(tempo_cat != null){
+                cadena_html += "<div class=\"col-lg-4 col-md-6 portfolio-item filter-fanta\">";
+                            cadena_html += "<img src=\"assets/img/portfolio/cat.jpg\" class=\"img-fluid\" alt=\"\">";
+                            cadena_html += "<div id=\"portfolio-info\">";
+                            cadena_html += "<h4>Categoria: "+tempo_cat.objeto_categoria.company+"</h4>";
+                            cadena_html += "<p>ID: "+tempo_cat.objeto_categoria.id+"</p>";
+                            cadena_html += "</div>";
+                            cadena_html += "</div>";
+                tempo_cat = tempo_cat.siguiente;
+            }
+            tempo = tempo.siguiente;
+        }
+                    cadena_html += "</div>"
+                    
+                    cadena_html += "</div>"
+                    cadena_html += "</section>"
+        console.log(cadena_html)
+        
+        
+        
+        document.getElementById("vista_categoria").innerHTML = cadena_html;
+
+    }
+
+   

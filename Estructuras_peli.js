@@ -88,7 +88,7 @@ class Arbol_AVL{
                     //rotacion doble derecha
                 }
             }else{
-                nodo.objeto_pelicula = ob_peli;
+                //nodo.objeto_pelicula = ob_peli;
             }
         }
         nodo.altura = this.MAXIMO(this.altura(nodo.izquierda),this.altura(nodo.derecha))+1

@@ -1,5 +1,5 @@
 .btn{
-	border-radius: 3px;/*esquina*/
+	border-radius: 10px;/*esquina*/
 	display: inline-block;
 	padding: 20px 15px;/*tamaño*/
 	text-decoration: none;/*decoracion del texto*/
@@ -13,9 +13,20 @@
 	background-color: #0E0440;	/*color del boton normal*/
 }
 .btn-green:hover{
-background-color: #C0C0C0;/*color cuando le pase por encima*/
+	background: #d01d3f;/*color cuando le pase por encima*/
 
 }
-.btn-green:active{
-	background-color: #29962A;/*color cuando se active*/
-}
+/*
+.contact button:hover {
+	background: #d01d3f;
+  }
+  .features button {
+	background: #e43c5c;
+	border: 0;
+	padding: 10px 35px;
+	color: #fff;
+	transition: 0.4s;
+	border-radius: 50px;
+	width: 250px;
+	height: 70px;
+  }*/

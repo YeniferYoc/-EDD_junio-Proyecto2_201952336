@@ -57,7 +57,7 @@ class Lista_pelis{
             let tempo2 = this.head;
             let contador_us2 = 0;
             while(tempo2 != null && tempo2.siguiente != null){
-                if((tempo2.siguiente.objeto_valor.nom_pelicula) < (tempo2.objeto_valor.nom_pelicula) ){
+                if((tempo2.siguiente.objeto_valor.id) < (tempo2.objeto_valor.id) ){
                     
                     aux = tempo2.objeto_valor;
                     tempo2.objeto_valor = tempo2.siguiente.objeto_valor;
@@ -81,7 +81,7 @@ class Lista_pelis{
             let tempo2 = this.head;
             let contador_us2 = 0;
             while(tempo2 != null && tempo2.siguiente != null){
-                if((tempo2.siguiente.objeto_valor.nom_pelicula) > (tempo2.objeto_valor.nom_pelicula) ){
+                if((tempo2.siguiente.objeto_valor.id) > (tempo2.objeto_valor.id) ){
                    
                     aux = tempo2.objeto_valor;
                     tempo2.objeto_valor = tempo2.siguiente.objeto_valor;

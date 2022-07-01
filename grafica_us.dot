@@ -1,6 +1,16 @@
 digraph L{
  node[shape = box fillcolor = "white" style  = filled]
  subgraph cluster_p{
+    <script src="https://superal.github.io/canvas2image/canvas2image.js "></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  function descargarGrafo(_id) {
+            html2canvas($('#' + _id)[0]).then(function (canvas) {
+                return Canvas2Image.saveAsPNG(canvas);
+                $(".response").append(canvas);
+            });
+        }
  
  bgcolor = "gray";
  celda0[label= "0. Cliente: Hernandez
