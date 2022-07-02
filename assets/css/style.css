@@ -1138,6 +1138,19 @@ section {
   width: 250px;
   height: 70px;
 }
+.about button:hover {
+  background: #d01d3f;
+}
+.about button {
+  background: #e43c5c;
+  border: 0;
+  padding: 10px 35px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+  width: 250px;
+  height: 70px;
+}
 .features button:hover {
   background: #d01d3f;
 }

@@ -5,15 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        function descargarGrafo(_id) {
+            html2canvas($('#' + _id)[0]).then(function (canvas) {
+                return Canvas2Image.saveAsPNG(canvas);
+                $(".response").append(canvas);
+            });
+        }
+</script>
 </head>
 <body>
-    <h1>YENIFER ESTER YOC LARIOS 201952336</h1>
-     <div id = "log"></div>
+    <div id="imagen">
+        <p>Esto es una prueba para <strong>exportar código HTML</strong> a imagen en formato PNG. Ofrecido por ProgramacionExtrema.com<p>
+      </div>
+      <button onclick="descargarGrafo('imagen')">Descargar imagen</button>
 </body>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+<script src="https://superal.github.io/canvas2image/canvas2image.js "></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script src="//d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
     <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
-  
-<script type="module" src="./tarea5.js"></script>
-  
+    <script type="module" src="./imagen.js"></script>
+    <script src="https://superal.github.io/canvas2image/canvas2image.js "></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>

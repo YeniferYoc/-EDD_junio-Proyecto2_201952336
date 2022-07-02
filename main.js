@@ -17,6 +17,7 @@ import { Comentario } from "./Comentario.js";
 let user_archive;
 let cate_archive;
 let usuario_ingresado = 1;
+let nombre_us_ing = "";
 let contra_ingre;
 let peli_archive;
 let actor_archive;
@@ -50,8 +51,11 @@ document.getElementById("gra_cli").onclick = graficar_usuarios;
 document.getElementById("gra_cate").onclick = graficar_tabla_hash;
 document.getElementById("gra_peli").onclick = graficar_peliculas;
 document.getElementById("gra_actores").onclick = graficar_actores;
-document.getElementById("ver_pelis").onclick = vista_peliculas;
+document.getElementById("ver_pelis").onclick = div_pelis;
+document.getElementById("ver_actores").onclick = div_actores;
 document.getElementById("ver_cate").onclick = vista_categorias;
+document.getElementById("cerrar").onclick = Cerrar_sesion;
+document.getElementById("cerrar_").onclick = Cerrar_sesion;
 
 
 
@@ -186,6 +190,7 @@ document.getElementById("ver_cate").onclick = vista_categorias;
             }else{
                 console.log("se pinta")
                 document.getElementById("vista_peliculas_").innerHTML = cadena_info;
+
                 for(let i = 0; i<5;i++){
                     if(i<calificacion_peli){
                      document.getElementById((i+1)+"_es").style.color = "orange";
@@ -235,9 +240,20 @@ document.getElementById("ver_cate").onclick = vista_categorias;
                 console.log("entro comentarios")
                 if(nombre_bot == btn){
                     let coment_caja = (document.getElementById("comment").value)
-                    let nuevo_comentario = new Comentario(coment_caja, usuario_ingresado);
+                    let nuevo_comentario = new Comentario(coment_caja, nombre_us_ing);
                     tempo.objeto_valor.comentarios.agregar_comentario(nuevo_comentario)
                     
+                    let cadena_comentario = "<div id=\"comment-n\" class=\"comment\">";
+                        cadena_comentario += "<div class=\"d-flex\">";
+                        cadena_comentario += "<div class=\"comment-img\"><img src=\"assets/img/blog/usuar.png\" alt=\"\"></div>";
+                        cadena_comentario += "<div>";
+                        cadena_comentario += "<h5>Tu: </h5>";
+                        cadena_comentario += "<p>"+coment_caja+"</p>";
+                        cadena_comentario += "</div>";
+                        cadena_comentario += "</div>";
+                        cadena_comentario += "</div>";
+
+                    document.getElementById("nuevo_com").innerHTML = cadena_comentario;
                     alert("Gracias por sus comentarios!")
                     document.getElementById("comment").value = ""; 
                 }
@@ -262,7 +278,7 @@ document.getElementById("ver_cate").onclick = vista_categorias;
        
 
     function proceso_carga_user(){
-        alert("entro")
+        //alert("entro")
         let reader = new FileReader();
         reader.readAsText(user_archive);
         reader.addEventListener('load',sent_user_to_server,false);
@@ -289,7 +305,7 @@ document.getElementById("ver_cate").onclick = vista_categorias;
         //graficar_lista_us();
         
        
-        alert("Succefull");
+        alert("¡Guardado con exito!");
     }
     // -------------- PELICULAS -----------------------------
     window.addEventListener('load', function () {
@@ -300,7 +316,7 @@ document.getElementById("ver_cate").onclick = vista_categorias;
     });
 
     function proceso_carga_peli(){
-        alert("entro")
+        //alert("entro")
         let reader = new FileReader();
         reader.readAsText(peli_archive);
         reader.addEventListener('load',sent_peli_to_server,false);
@@ -332,7 +348,7 @@ document.getElementById("ver_cate").onclick = vista_categorias;
         //document.getElementById("biblioteca_vista").style.display = ""; 
         
        
-        alert("Succefull");
+        alert("¡Guardado con exito!");
     }
 
     // --------------- ACTORES ------------------------
@@ -369,7 +385,7 @@ document.getElementById("ver_cate").onclick = vista_categorias;
         vista_autores(lista_autores)
         //arbol_binario.graficar_arbol()
         graficar_arbol()*/
-        alert("Succefull");
+        alert("¡Guardado con exito!");
     }
     //-------------------- TABLA HASJ DE CATEGORIAS------------------
     // ------------------------------------
@@ -381,7 +397,7 @@ document.getElementById("ver_cate").onclick = vista_categorias;
     });
 
     function proceso_carga_cate(){
-        alert("entro")
+        //alert("entro")
         let reader = new FileReader();
         reader.readAsText(cate_archive);
         reader.addEventListener('load',sent_cate_to_server,false);
@@ -427,30 +443,23 @@ document.getElementById("ver_cate").onclick = vista_categorias;
         }
         tabla_hash.ImprimirLista();
         //graficar_lista_us();
-        alert("Succefull");
+        alert("¡Guardado con exito!");
     }
     //-----------------------FIN CARGAS MASIVAS ------------------------------
     async function Cerrar_sesion() {
-        
-
                 document.getElementById("admin").style.display = "none"; 
-                document.getElementById("cola").style.display = "none"; 
-                document.getElementById("list_usua").style.display = "none"; 
-                document.getElementById("biblioteca").style.display = "none"; 
-                document.getElementById("autores").style.display = "none";
                 document.getElementById("usuario").style.display = "none"; 
-                document.getElementById("comprar").style.display = "none"; 
-                document.getElementById("dis_pila").style.display = "none";
-                document.getElementById("buscar_autor").style.display = "none";
+                document.getElementById("vista_peliculas").style.display = "none"; 
+                document.getElementById("vista_categoria").style.display = "none"; 
+                document.getElementById("vista_actores").style.display = "none";
+                
                 alert("ADIOS") 
               
          }
 
-    async function login() {
-        
+    async function login() { 
         let nom_usu = (document.getElementById("user_caja").value)
         let contra_usu = document.getElementById("contra").value
-        
         contra_ingre = contra_usu;
         let tempo = lista_us.head;
         let cre_correcta = false;
@@ -459,32 +468,66 @@ document.getElementById("ver_cate").onclick = vista_categorias;
             if (nom_usu =="EDD" && contra_usu == "123"){
                 alert("BIENVENIDO ADMINSTRADOR")
                     cre_correcta=true;
+                    document.getElementById("vista_actores").style.display = "none"; 
+                    document.getElementById("vista_categoria").style.display = "none"; 
+                    document.getElementById("vista_peliculas").style.display = "none";
                     document.getElementById("admin").style.display = ""; 
                     
                 }else{
                     alert("NO ERES ADMINISTRADOR, POR FAVOR INTENTALO DE NUEVO")
                     document.getElementById("admin").style.display = "none"; 
+                document.getElementById("usuario").style.display = "none"; 
+                document.getElementById("vista_peliculas").style.display = "none"; 
+                document.getElementById("vista_categoria").style.display = "none"; 
+                document.getElementById("vista_actores").style.display = "none";
+              
+                 
             }
         }else{
             while(tempo !=null){
                 if(tempo.objeto_cliente.usuario == nom_usu && tempo.objeto_cliente.contra == contra_usu){
                     cre_correcta = true;
                     usuario_ingresado = tempo.objeto_cliente.dpi;
+                    nombre_us_ing = tempo.objeto_cliente.usuario;
                     alert("BIENVENIDO USUARIO")
+                    
+                    document.getElementById("admin").style.display = "none"; 
                     document.getElementById("usuario").style.display = "";
+                    let cadena = "";
+                    document.getElementById("vista_peliculas_").innerHTML = cadena;
                 }
                 tempo = tempo.siguiente
             }
         } 
         if(cre_correcta==false){
             alert("CREDENCIALES INCORRECTAS, POR FAVOR VUELVE A INTENTARLO")
+            document.getElementById("admin").style.display = "none"; 
+                document.getElementById("usuario").style.display = "none"; 
+                document.getElementById("vista_peliculas").style.display = "none"; 
+                document.getElementById("vista_categoria").style.display = "none"; 
+                document.getElementById("vista_actores").style.display = "none";
+                
         }
-
-
 
         document.getElementById("user_caja").value = "";
         document.getElementById("contra").value = "";
         }
+
+    async function div_pelis(){
+        document.getElementById("vista_actores").style.display = "none"; 
+        document.getElementById("vista_categoria").style.display = "none"; 
+        document.getElementById("vista_peliculas").style.display = "";
+    }
+    async function div_actores(){
+        document.getElementById("vista_peliculas").style.display = "none"; 
+        document.getElementById("vista_categoria").style.display = "none"; 
+        document.getElementById("vista_actores").style.display = "";
+    }
+    async function div_cate(){
+        document.getElementById("vista_actores").style.display = "none"; 
+        document.getElementById("vista_peliculas").style.display = "none"; 
+        document.getElementById("vista_categoria").style.display = "";
+    }
     function graficar_usuarios() {
             console.log("GRAFICANDO USUARIOS")
             
@@ -530,8 +573,9 @@ document.getElementById("ver_cate").onclick = vista_categorias;
             console.log(codigo_dot)
             
             d3.select("#lienzo_admin").graphviz()
-                        .width(18000)
-                        .height(500)
+                        .width(1150)
+                        .height(700)
+                        .fit(true)
                         .renderDot(codigo_dot)
     
                  }
@@ -542,8 +586,9 @@ document.getElementById("ver_cate").onclick = vista_categorias;
                     console.log(codigo_dot)
                     
                     d3.select("#lienzo_admin").graphviz()
-                                .width(1800)
-                                .height(500)
+                                .width(1100)
+                                .height(700)
+                                .fit(true)
                                 .renderDot(codigo_dot)
             
                          }
@@ -554,8 +599,9 @@ document.getElementById("ver_cate").onclick = vista_categorias;
                     console.log(codigo_dot)
                     
                     d3.select("#lienzo_admin").graphviz()
-                                .width(1800)
-                                .height(500)
+                                .width(1100)
+                                .height(700)
+                                .fit(true)
                                 .renderDot(codigo_dot)
             
                          }
@@ -649,8 +695,9 @@ document.getElementById("ver_cate").onclick = vista_categorias;
         console.log(codigo_dot)
         
         d3.select("#lienzo_admin").graphviz()
-                    .width(1800)
-                    .height(500)
+                    .width(1100)
+                    .height(700)
+                    .fit(true)
                     .renderDot(codigo_dot)
 
              }
@@ -697,7 +744,7 @@ function llenar_(nodo){
                 //dispobile para todos
                 console.log("todos")
                 cadena += "<div class=\"col-lg-2 col-md-6 footer-contact\">";
-            cadena += "<h3 id = \""+nodo.objeto_valor.id+"_e\">"+nodo.objeto_valor.nom_pelicula+"</h3>";
+            cadena += "<h3 id = \""+nodo.objeto_valor.id+"_e\">"+nodo.objeto_valor.id+". "+nodo.objeto_valor.nom_pelicula+"</h3>";
             cadena += "</div>";
             cadena += "<div class=\"col-lg-3 col-md-6 footer-newsletter\">";
             cadena += "<h4>DESCRIPCION</h4>";
@@ -718,7 +765,7 @@ function llenar_(nodo){
                 console.log("solo us")
                 //no esta disponible pero si para el dueño
                 cadena += "<div class=\"col-lg-2 col-md-6 footer-contact\">";
-            cadena += "<h3 id = \""+nodo.objeto_valor.id+"_e\">"+nodo.objeto_valor.nom_pelicula+"</h3>";
+            cadena += "<h3 id = \""+nodo.objeto_valor.id+"_e\">"+nodo.objeto_valor.id+". "+nodo.objeto_valor.nom_pelicula+"</h3>";
             cadena += "</div>";
             cadena += "<div class=\"col-lg-3 col-md-6 footer-newsletter\">";
             cadena += "<h4>DESCRIPCION</h4>";
@@ -727,12 +774,12 @@ function llenar_(nodo){
             cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
             cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_info\" >Informacion</button>";
             cadena += "</div>";
-                /*cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
-                cadena += "<button type=\"button\" class=\"btn btn-secondary\" id =\""+nodo.objeto_valor.id+"_comprar\" >Alquilar</button>";
+                cadena += "<div class=\"col-lg-2 col-md-6 footer-links\">";
+                cadena += "<p>Disponible</p>";
                 cadena += "</div>";
                 cadena += "<div class=\"col-lg-3 col-md-6 footer-links\">";
                 cadena += "<h4>Precio: Q."+nodo.objeto_valor.precio+"</h4>";
-                cadena += "</div>";*/
+                cadena += "</div>";
             }else{
                 //no esta disponible ni el es dueño
             }
@@ -784,7 +831,7 @@ function llenar_(nodo){
     function pre_orden(nodo){
         if(nodo!=null){
             cadena_actores += "<h2 class=\"entry-title\">";
-            cadena_actores += ""+contador_ac+". "+nodo.ob_actor.nombre+"";
+            cadena_actores += ""+nodo.ob_actor.dni+". "+nodo.ob_actor.nombre+"";
             cadena_actores += "</h2>";
                     cadena_actores += "<div class=\"entry-content\">";
                     cadena_actores += "<p>Descripción: "+nodo.ob_actor.descripcion+"</p>";
@@ -817,7 +864,7 @@ function llenar_(nodo){
         if(nodo!=null){
             in_orden(nodo.izquierda);
             cadena_actores += "<h2 class=\"entry-title\">";
-            cadena_actores += ""+contador_ac+". "+nodo.ob_actor.nombre+"";
+            cadena_actores += ""+nodo.ob_actor.dni+". "+nodo.ob_actor.nombre+"";
             cadena_actores += "</h2>";
                     cadena_actores += "<div class=\"entry-content\">";
                     cadena_actores += "<p>Descripción: "+nodo.ob_actor.descripcion+"</p>";
@@ -850,7 +897,7 @@ function llenar_(nodo){
             pos_orden(nodo.izquierda);
             pos_orden(nodo.derecha);
             cadena_actores += "<h2 class=\"entry-title\">";
-            cadena_actores += ""+contador_ac+". "+nodo.ob_actor.nombre+"";
+            cadena_actores += ""+nodo.ob_actor.dni+". "+nodo.ob_actor.nombre+"";
             cadena_actores += "</h2>";
                     cadena_actores += "<div class=\"entry-content\">";
                     cadena_actores += "<p>Descripción: "+nodo.ob_actor.descripcion+"</p>";
@@ -860,6 +907,9 @@ function llenar_(nodo){
         }
     }
     function vista_categorias(){
+        document.getElementById("vista_actores").style.display = "none"; 
+        document.getElementById("vista_peliculas").style.display = "none"; 
+        document.getElementById("vista_categoria").style.display = "";
         var cadena_html = "<section id=\"portfolio\" class=\"portfolio\">";
         cadena_html += "<div class=\"container\">";
         cadena_html += "<div class=\"section-title\">";
