@@ -508,7 +508,7 @@ document.getElementById("cerrar_").onclick = Cerrar_sesion;
                 document.getElementById("vista_actores").style.display = "none";
                 
         }
-
+        document.getElementById("admin_check").checked = false;
         document.getElementById("user_caja").value = "";
         document.getElementById("contra").value = "";
         }
