@@ -34,8 +34,6 @@ class Nodo{
       
     }
 }
-
-
 class Arbol_binario{
     constructor(){
         this.raiz = null;

@@ -12,8 +12,6 @@ import { Valor_hash } from "./Valor_hash.js";
 import { Lista_pelis } from "./lista_libros.js";
 import { Comentario } from "./Comentario.js";
 
-
-
 let user_archive;
 let cate_archive;
 let usuario_ingresado = 1;

@@ -1,4 +1,0 @@
-digraph L{
- node[shape = box fillcolor = "white" style  = filled]
- subgraph MIO{
-    25->10;25->35;10->5;10->20;35->30;35->40;}}
